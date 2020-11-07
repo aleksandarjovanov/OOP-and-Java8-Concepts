@@ -378,7 +378,7 @@ public class BankTester {
                     Transaction t = getTransaction(descrption, from_idx, to_idx, amount, parameter, bank);
                     System.out.println("Transaction amount: " + t.getAmount());
                     System.out.println("Transaction description: " + t.getDescription());
-                    System.out.println("Transaction successful? " + bank.makeTransaction(t));
+                    System.out.println("Transaction succeѕоsful? " + bank.makeTransaction(t));
                     break;
                 case "print":
                     System.out.println(bank.toString());
