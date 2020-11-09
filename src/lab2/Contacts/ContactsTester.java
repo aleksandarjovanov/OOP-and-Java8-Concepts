@@ -1,18 +1,16 @@
 package lab2.Contacts;
 
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-abstract class Contact implements Comparable<Contact>{
+abstract class Item implements Comparable<Item>{
 
     private String date;
 
-    public Contact(String date){
+    public Item(String date){
         this.date = date;
     }
 
@@ -32,19 +30,19 @@ abstract class Contact implements Comparable<Contact>{
 //    }
 
 
-    public boolean isNewerThan(Contact c){
+    public boolean isNewerThan(Item c){
         return this.date.compareTo(c.date) > 0;
     }
 
     @Override
-    public int compareTo(Contact contact) {
+    public int compareTo(Item contact) {
         return this.isNewerThan(contact) ? 1 : -1;
     }
 
     abstract public String getType();
 }
 
-class EmailContact extends Contact{
+class EmailContact extends Item {
 
     private String email;
 
@@ -63,7 +61,7 @@ class EmailContact extends Contact{
     }
 }
 
-class PhoneContact extends Contact{
+class PhoneContact extends Item {
 
     enum Operator{ VIP, ONE, TMOBILE }
 
@@ -103,7 +101,7 @@ class PhoneContact extends Contact{
 
 class Student{
 
-    private Contact [] contacts;
+    private Item[] contacts;
     private String firstName;
     private String lastName;
     private String city;
@@ -117,13 +115,13 @@ class Student{
         this.city = city;
         this.age = age;
         this.index = index;
-        contacts = new Contact[0];
+        contacts = new Item[0];
     }
 
     public void increaseContacts(){
-        Contact [] tmp = new Contact[this.contacts.length];
+        Item[] tmp = new Item[this.contacts.length];
         tmp = Arrays.copyOf(this.contacts, contacts.length);
-        this.contacts = new Contact[tmp.length + 1];
+        this.contacts = new Item[tmp.length + 1];
         this.contacts = Arrays.copyOf(tmp, contacts.length);
     }
 
@@ -141,16 +139,16 @@ class Student{
         return this.contacts.length;
     }
 
-    public Contact[] getEmailContacts(){
+    public Item[] getEmailContacts(){
         return Arrays.stream(this.contacts)
                 .filter(c -> c.getType().equals("Email"))
-                .toArray(Contact[]::new);
+                .toArray(Item[]::new);
     }
 
-    public Contact[] getPhoneContacts(){
+    public Item[] getPhoneContacts(){
         return Arrays.stream(this.contacts)
                 .filter(c -> c.getType().equals("Phone"))
-                .toArray(Contact[]::new);
+                .toArray(Item[]::new);
     }
 
     public String getCity(){
@@ -165,9 +163,9 @@ class Student{
         return index;
     }
 
-    public Contact getLatestContact(){
+    public Item getLatestContact(){
         return Arrays.stream(contacts)
-                .max(Contact::compareTo)
+                .max(Item::compareTo)
                 .get();
     }
 
@@ -321,7 +319,7 @@ public class ContactsTester {
                     rvalue++;
 
                     System.out.print("Latest contact: ");
-                    Contact latestContact = faculty.getStudent(rindex)
+                    Item latestContact = faculty.getStudent(rindex)
                             .getLatestContact();
                     if (latestContact.getType().equals("Email"))
                         System.out.println(((EmailContact) latestContact)
