@@ -142,11 +142,15 @@ class Student{
     }
 
     public Contact[] getEmailContacts(){
-        return Arrays.stream(this.contacts).filter(c -> c.getType().equals("Email")).toArray(Contact[]::new);
+        return Arrays.stream(this.contacts)
+                .filter(c -> c.getType().equals("Email"))
+                .toArray(Contact[]::new);
     }
 
     public Contact[] getPhoneContacts(){
-        return Arrays.stream(this.contacts).filter(c -> c.getType().equals("Phone")).toArray(Contact[]::new);
+        return Arrays.stream(this.contacts)
+                .filter(c -> c.getType().equals("Phone"))
+                .toArray(Contact[]::new);
     }
 
     public String getCity(){
@@ -162,7 +166,9 @@ class Student{
     }
 
     public Contact getLatestContact(){
-        return Arrays.stream(contacts).max(Contact::compareTo).get();
+        return Arrays.stream(contacts)
+                .max(Contact::compareTo)
+                .get();
     }
 
     @Override
@@ -187,19 +193,29 @@ class Faculty{
     }
 
     public int countStudentsFromCity(String cityName){
-        return (int) Arrays.stream(students).filter(s -> s.getCity().equals(cityName)).count();
+        return (int) Arrays.stream(students)
+                .filter(s -> s.getCity().equals(cityName))
+                .count();
     }
 
     public Student getStudent(long index){
-        return Arrays.stream(students).filter(s -> s.getIndex() == index).findFirst().get();
+        return Arrays.stream(students)
+                .filter(s -> s.getIndex() == index)
+                .findFirst().get();
     }
 
     public double getAverageNumberOfContacts(){
-        return Arrays.stream(students).mapToInt(Student::contactsLength).average().getAsDouble();
+        return Arrays.stream(students)
+                .mapToInt(Student::contactsLength)
+                .average()
+                .getAsDouble();
     }
 
     public Student getStudentWithMostContacts(){
-        return Arrays.stream(students).max(Comparator.comparingInt(Student::contactsLength).thenComparing(Student::getIndex)).get();
+        return Arrays.stream(students)
+                .max(Comparator.comparingInt(Student::contactsLength)
+                        .thenComparing(Student::getIndex))
+                .get();
     }
 
     @Override
