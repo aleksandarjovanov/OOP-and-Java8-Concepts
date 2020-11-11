@@ -40,7 +40,7 @@ class OrderLockedException extends Exception{
 interface Item{
     int getPrice();
 
-    boolean forceEquals(Object o);
+    boolean equals(Object o);
 
     String getType();
 
@@ -75,7 +75,7 @@ class ExtraItem implements Item{
     }
 
     @Override
-    public boolean forceEquals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ExtraItem)) return false;
         ExtraItem extraItem = (ExtraItem) o;
@@ -113,7 +113,7 @@ class PizzaItem implements Item{
     }
 
     @Override
-    public boolean forceEquals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PizzaItem)) return false;
         PizzaItem pizzaItem = (PizzaItem) o;
@@ -151,7 +151,7 @@ class Product{
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return item.forceEquals(product.item);
+        return item.equals(product.item);
     }
 
     @Override

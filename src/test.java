@@ -1,11 +1,39 @@
+
+interface A{
+    void getViki();
+}
+
+
+class Parent{
+    public void getViki(){
+        System.out.println("Parent");
+    }
+
+    public void getAce(){
+        System.out.println("PARENTT ACE");
+    }
+}
+
+class Child1 extends Parent implements A{
+
+    @Override
+    public void getViki() {
+        System.out.println("Child");
+    }
+}
+
+
+
 public class test {
     public static void main(String[] args) {
 
-        String a = new String("2002-11-15");
-        String b = new String("1105-11-12");
+        A objInterface = new Child1();
 
+        objInterface.getViki();
 
-        System.out.println(a.compareTo(b));
+        Parent p = new Child1();
 
+        p.getViki();
+        p.getAce();
     }
 }

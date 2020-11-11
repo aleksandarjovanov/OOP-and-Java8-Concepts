@@ -119,8 +119,7 @@ class Student{
     }
 
     public void increaseContacts(){
-        Item[] tmp = new Item[this.contacts.length];
-        tmp = Arrays.copyOf(this.contacts, contacts.length);
+        Item[] tmp = Arrays.copyOf(this.contacts, contacts.length);
         this.contacts = new Item[tmp.length + 1];
         this.contacts = Arrays.copyOf(tmp, contacts.length);
     }
