@@ -1,32 +1,46 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
+class Person{
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
 
 public class test {
 
-
-
-    public static double statistic(List<? extends Number> list){
-
-        double sum = 0;
-        for(Number t : list){
-            sum += t.doubleValue();
-        }
-        return sum;
-    }
-
     public static void main(String[] args) {
 
-        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4));
+        List<Person> persons = Arrays.asList(new Person("Max", 18),
+                new Person("Peter", 23),
+                new Person("Pamela", 23),
+                new Person("David", 12));
 
-        statistic(list);
 
-
+        HashMap<String,String> map = new HashMap<>();
+        
 
     }
 }
