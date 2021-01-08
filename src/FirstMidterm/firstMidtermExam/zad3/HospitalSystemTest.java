@@ -1,4 +1,4 @@
-package firstMidtermExam.zad3;
+package FirstMidterm.firstMidtermExam.zad3;
 
 
 import java.util.ArrayList;

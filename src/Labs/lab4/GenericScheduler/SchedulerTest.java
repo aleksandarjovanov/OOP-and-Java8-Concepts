@@ -1,4 +1,4 @@
-package lab4.GenericScheduler;
+package Labs.lab4.GenericScheduler;
 
 
 import java.time.Instant;

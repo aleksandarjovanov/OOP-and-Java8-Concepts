@@ -1,4 +1,4 @@
-package lab2.MovableObjects;
+package Labs.lab2.MovableObjects;
 
 import java.util.Scanner;
 import java.util.Arrays;

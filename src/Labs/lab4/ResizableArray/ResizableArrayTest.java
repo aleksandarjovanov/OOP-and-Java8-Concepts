@@ -1,13 +1,10 @@
-package lab4.ResizableArray;
+package Labs.lab4.ResizableArray;
 
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 class ResizableArray<T>{
 

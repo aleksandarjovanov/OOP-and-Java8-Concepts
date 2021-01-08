@@ -1,4 +1,4 @@
-package lab4.GenericQueue;
+package Labs.lab4.GenericQueue;
 
 import java.util.LinkedList;
 import java.util.Scanner;

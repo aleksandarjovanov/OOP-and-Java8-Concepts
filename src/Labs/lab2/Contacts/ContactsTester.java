@@ -1,4 +1,4 @@
-package lab2.Contacts;
+package Labs.lab2.Contacts;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;

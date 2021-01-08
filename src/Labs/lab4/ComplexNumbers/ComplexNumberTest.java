@@ -1,4 +1,4 @@
-package lab4.ComplexNumbers;
+package Labs.lab4.ComplexNumbers;
 
 import java.util.Collections;
 import java.util.LinkedList;

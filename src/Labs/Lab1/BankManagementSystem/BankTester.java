@@ -1,7 +1,6 @@
-package Lab1.BankManagementSystem;
+package Labs.Lab1.BankManagementSystem;
 
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 

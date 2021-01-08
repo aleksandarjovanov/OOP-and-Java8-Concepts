@@ -1,11 +1,10 @@
-package lab2.DoubleMatrix;
+package Labs.lab2.DoubleMatrix;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

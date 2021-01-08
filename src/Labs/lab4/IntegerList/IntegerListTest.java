@@ -1,4 +1,4 @@
-package lab4.IntegerList;
+package Labs.lab4.IntegerList;
 
 import java.util.*;
 import java.util.stream.IntStream;

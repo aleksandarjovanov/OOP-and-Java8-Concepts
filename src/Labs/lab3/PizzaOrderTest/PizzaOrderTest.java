@@ -1,4 +1,4 @@
-package lab3.PizzaOrderTest;
+package Labs.lab3.PizzaOrderTest;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package lab3.PhoneBook;
+package Labs.lab3.PhoneBook;
 
 import java.io.*;
 import java.util.Arrays;
