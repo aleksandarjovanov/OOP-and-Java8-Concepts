@@ -116,6 +116,7 @@ public class FileSystemTest {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
         scanner.nextLine();
+
         for (int i = 0; i < n; i++) {
             String line = scanner.nextLine();
             String[] parts = line.split(":");
