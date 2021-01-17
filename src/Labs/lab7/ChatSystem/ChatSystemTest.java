@@ -6,10 +6,12 @@ import java.util.*;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-class ChatRoom {
+class ChatRoom implements Comparable<ChatRoom>{ /////////////////dqwdqwasdasda nemam idea..................
 
     private String roomName;
-    private Set<String> users;
+    private TreeSet<String> users;
+    public static Comparator<ChatRoom> comparator = Comparator.comparingInt(ChatRoom::numUsers)
+            .thenComparing(ChatRoom::getRoomName).reversed();   // nemam idea zaso ne rabote !!!!!!!!!!!!!!!!!!!
 
     public ChatRoom(String roomName) {
         this.roomName = roomName;
@@ -55,40 +57,35 @@ class ChatRoom {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ChatRoom)) return false;
-        ChatRoom chatRoom = (ChatRoom) o;
-        return roomName.equals(chatRoom.roomName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(roomName);
+    public int compareTo(ChatRoom chatRoom) {
+        return comparator.compare(this, chatRoom);
     }
 }
 
 class ChatSystem {
 
-    private Map<String, ChatRoom> roomsByName;
     private Set<String> allUsers;
     private TreeSet<ChatRoom> allRooms;
+    private Map<String, ChatRoom> roomsByName;
+
 
     public ChatSystem() {
         roomsByName = new TreeMap<>();
         allUsers = new TreeSet<>();
-        allRooms = new TreeSet<>(Comparator.comparing(ChatRoom::numUsers).thenComparing(ChatRoom::getRoomName));
+        allRooms = new TreeSet<>();
     }
 
     public void addRoom(String roomName) {
         ChatRoom chatRoom = new ChatRoom(roomName);
         allRooms.add(chatRoom);
         roomsByName.putIfAbsent(roomName, chatRoom);
+
     }
 
     public void removeRoom(String roomName) {
-        allRooms.remove(new ChatRoom(roomName));
+        ChatRoom chatRoom = roomsByName.get(roomName);
         roomsByName.remove(roomName);
+        allRooms.remove(chatRoom);
     }
 
     public ChatRoom getRoom(String roomName) throws NoSuchRoomException {
@@ -101,13 +98,17 @@ class ChatSystem {
         allUsers.add(username);
 
         if(!allRooms.isEmpty()) {
-            allRooms.last().addUser(username);
+            ChatRoom room = allRooms.last();
+            allRooms.remove(room);
+            room.addUser(username);
+            allRooms.add(room);             // promenata na ovoj ChatRoom ke se reflektira i vo TreeMap roomsByName
         }
+
     }
 
-    public void registerAndJoin(String username, String roomName) {
+    public void registerAndJoin(String username, String roomName) throws NoSuchRoomException, NoSuchUserException {
         allUsers.add(username);
-        roomsByName.get(roomName).addUser(username);
+        joinRooms(username, roomName);
     }
 
     public void joinRooms(String username, String roomName) throws NoSuchRoomException, NoSuchUserException {
@@ -115,10 +116,38 @@ class ChatSystem {
             throw new NoSuchRoomException(roomName);
         if (!allUsers.contains(username))
             throw new NoSuchUserException(username);
-        roomsByName.get(roomName).addUser(username);
+        ChatRoom room = roomsByName.get(roomName);    // ista prikazna
+        allRooms.remove(room);
+        room.addUser(username);
+        allRooms.add(room);
     }
 
+    public void leaveRoom(String username, String roomName) throws NoSuchRoomException, NoSuchUserException {
+        if(!roomsByName.containsKey(roomName))
+            throw new NoSuchRoomException(roomName);
+        if (!allUsers.contains(username))
+            throw new NoSuchUserException(username);
 
+        ChatRoom room = roomsByName.get(roomName);
+        allRooms.remove(room);
+        room.removeUser(username);
+        allRooms.add(room);
+    }
+
+    public void followFriend(String userName, String friend_username) throws NoSuchUserException {
+        if (!allUsers.contains(friend_username))
+            throw new NoSuchUserException(friend_username);
+        List<ChatRoom> friendRooms = roomsByName.values()
+                .stream()
+                .filter(room -> room.hasUser(friend_username))
+                .collect(Collectors.toList());
+
+        for(ChatRoom friendRoom : friendRooms) {
+            allRooms.remove(friendRoom);
+            friendRoom.addUser(userName);
+            allRooms.add(friendRoom);
+        }
+    }
 
 }
 
@@ -166,7 +195,9 @@ public class ChatSystemTest {
                     }
                 }
             }
+
         }
+
     }
 
 }
