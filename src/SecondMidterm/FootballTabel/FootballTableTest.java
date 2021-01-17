@@ -15,7 +15,7 @@ class Team implements Comparable<Team> {
     private static Comparator<Team> comparator = Comparator.comparingInt(Team::getPoints)
             .thenComparing(Team::goalDifference)
             .reversed()
-            .thenComparing(Team::getPlayed);gi
+            .thenComparing(Team::getPlayed);
 
     public Team(String name, int played, int win, int draw, int lose, int scoredGoals, int concededGoals, int points) {
         this.name = name;
