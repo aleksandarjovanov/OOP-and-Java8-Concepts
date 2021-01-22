@@ -41,6 +41,13 @@ public class MapSortingTest {
     }
 
     public static <K, V extends Comparable<? super V>> SortedSet<Map.Entry<K, V>> entriesSortedByValues(Map<K, V> map) {
+
+//        Comparator<Map.Entry<K,V>> entryComparator = Map.Entry.<K, V>comparingByValue()
+//                .reversed()
+//                .thenComparing(Map.Entry.comparingByKey());
+
+
+
         return map.entrySet()
                 .stream()
                 .collect(Collectors.toCollection(() -> new TreeSet<>((o1, o2) -> {  // kako da go napravam komparatoro so thenComparing

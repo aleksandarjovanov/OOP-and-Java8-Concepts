@@ -105,7 +105,7 @@ class EventCalendar {
         eventsByDate.get(dateTime.toLocalDate()).forEach(System.out::println);
     }
 
-    public void listByMonth() {             // **********NAJBITEN GRUIPING BY************* //
+    public void listByMonth() {             // **********GRUIPING BY************* //
         TreeMap<Integer, Integer> tmp = eventsByDate.entrySet()
                 .stream()
                 .collect(Collectors.groupingBy(
