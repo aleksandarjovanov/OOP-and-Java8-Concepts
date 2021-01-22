@@ -52,21 +52,31 @@ public class test {
 //
 //        System.out.println(mapa);
 
-//        TreeSet<Person> set = new TreeSet<>(Person.comparator);
-        TreeMap<Integer, Person> map = new TreeMap<>(Comparator.reverseOrder());
+        TreeSet<Person> set = new TreeSet<>((p1, p2) -> {
+            Comparator<Person> comparator = Comparator.comparing(Person::getAge);
+            int result = comparator.thenComparing(Person::getName).compare(p1, p2);
+            return result;
+//            if( (Integer.compare(p1.getAge(), p2.getAge()) == 0) && (p1.getName().compareTo(p2.getName()) == 0) )
+//                return 0;
+//            return -1;
+        });
+//        TreeMap<Integer, Person> map = new TreeMap<>(Comparator.reverseOrder());
 
-        Person p1 = new Person("viki", 115);
-        Person p2 = new Person("ace", 22);
-        Person p3 = new Person("nekoj", 25);
+        Person p1 = new Person("viki", 15);
+        Person p2 = new Person("viki", 22);
+        Person p4 = new Person("viki", 22);
+        Person p3 = new Person("nekoj", 15);
 
-        map.put(3, p3);
-        map.put(1, p1);
-        map.put(2, p2);
+//        map.put(3, p3);
+//        map.put(1, p1);
+//        map.put(2, p2);
+//
+//        map.entrySet().forEach(System.out::println);
 
-        map.entrySet().forEach(System.out::println);
-
-//        set.add(p1);
-//        set.add(p2);
+        set.add(p1);
+        set.add(p2);
+        set.add(p3);
+        set.add(p4);
 //
 //        p1.setAge(4);
 //        map.putIfAbsent(1, p1);
@@ -76,7 +86,7 @@ public class test {
 //
 //        set.forEach(p -> p.setName("asd"));
 //
-//       System.out.println(set);
+       System.out.println(set);
 //        System.out.println(map);
     }
 }
